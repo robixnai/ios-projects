@@ -17,47 +17,55 @@ class ResultsViewController: UIViewController {
     
     
     var selectedJankenOption: JankenOption!
-    var itsATie: Bool?
-    var paperCoversRock: Bool?
-    var rockCrushesScissors: Bool?
-    var scissorsCutPaper: Bool?
+    var itsATie = false
+    var paperCoversRock = false
+    var rockCrushesScissors = false
+    var scissorsCutPaper = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let randomValue = Int(arc4random_uniform(2))
+        let randomValue = Int(arc4random_uniform(3))
         if let randomOption = JankenOption(rawValue: Int(randomValue)) {
-            checkConditions(randomOption)
+            checkConditions(randomOption)//randomOption)
             
-            configureOptionImageView(cpuOptionImageView, jankenOption: randomOption)
+            configureOptionImageView(cpuOptionImageView, jankenOption: randomOption)// randomOption)
             configureOptionImageView(youOptionImageView, jankenOption: selectedJankenOption)
         }
     }
 
     func checkConditions(cpuOption: JankenOption) {
-        itsATie = cpuOption == selectedJankenOption ? true : nil
-        rockCrushesScissors = cpuOption == .Rock && selectedJankenOption == .Scissors ? true : nil
-        paperCoversRock = cpuOption == .Paper && selectedJankenOption == .Rock ? true : nil
-        scissorsCutPaper = cpuOption == .Scissors && selectedJankenOption == .Paper ? true : nil
+        self.itsATie = cpuOption == self.selectedJankenOption ? true : false
         
-        rockCrushesScissors = selectedJankenOption == .Rock && cpuOption == .Scissors ? true : nil
-        paperCoversRock = selectedJankenOption == .Paper && cpuOption == .Rock ? true : nil
-        scissorsCutPaper = selectedJankenOption == .Scissors && cpuOption == .Paper ? true : nil
+        self.rockCrushesScissors = cpuOption == .Rock && self.selectedJankenOption == .Scissors ? true : false
+        if !self.rockCrushesScissors {
+            self.rockCrushesScissors = cpuOption == .Scissors && self.selectedJankenOption == .Rock ? true : false
+        }
+        
+        self.paperCoversRock = cpuOption == .Rock && self.selectedJankenOption == .Paper ? true : false
+        if !self.paperCoversRock {
+            self.paperCoversRock = cpuOption == .Paper && self.selectedJankenOption == .Rock ? true : false
+        }
+        
+        self.scissorsCutPaper = cpuOption == .Paper && self.selectedJankenOption == .Scissors ? true : false
+        if !self.scissorsCutPaper {
+            self.scissorsCutPaper = cpuOption == .Scissors && self.selectedJankenOption == .Paper ? true : false
+        }
         
         configureViews()
     }
     
     func configureViews() {
-        if itsATie != nil {
+        if itsATie {
             resultImageView.image = UIImage.init(named: "itsATie")
             captionLabel.text = "It's a tie!"
-        } else if (paperCoversRock != nil){
+        } else if (paperCoversRock){
             resultImageView.image = UIImage.init(named: "PaperCoversRock")
             captionLabel.text = "Paper covers Rock"
-        } else if (rockCrushesScissors != nil){
+        } else if (rockCrushesScissors){
             resultImageView.image = UIImage.init(named: "RockCrushesScissors")
             captionLabel.text = "Rock crushes Scissors"
-        } else if (scissorsCutPaper != nil){
+        } else if (scissorsCutPaper){
             resultImageView.image = UIImage.init(named: "ScissorsCutPaper")
             captionLabel.text = "Scissors Cut Paper"
         }
