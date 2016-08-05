@@ -30,12 +30,12 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         topTextField.delegate = self
         bottomTextField.delegate = self
         
+        imagePickerView.contentMode = UIViewContentMode.ScaleAspectFit
+        
 //        topTextField.defaultTextAttributes = memeFont
 //        bottomTextField.defaultTextAttributes = memeFont
 //        topTextField.attributedText = NSAttributedString(string: "TOP", attributes: memeFont)
 //        bottomTextField.attributedText = NSAttributedString(string: "BOTTOM", attributes: memeFont)
-        
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -50,6 +50,21 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.unsubscribeToKeyboardNotifications()
     }
     
+    func save() -> Meme{
+        let meme = Meme(top: topTextField.text!, bottom: bottomTextField.text!, original: imagePickerView.image!, meme: generateMemeImage())
+        return meme
+    }
+    
+    func generateMemeImage() -> UIImage {
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        
+        view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return memedImage
+    }
+    
     @IBAction func pickAnImageFromAlbum(sender: AnyObject) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -60,35 +75,47 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBAction func pickAnImageFromCamera(sender: AnyObject) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func shareImage(sender: AnyObject) {
+        let meme = save()
+        if let image = meme.memeImage {
+            let activityController =
+                UIActivityViewController(activityItems: [image],
+                                         applicationActivities: nil)
+            self.presentViewController(activityController, animated: true, completion: nil)
+        }
+        
+        
     }
 
     // MARK: UIImagePickerControllerDelegate
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        print("User cancelled the action")
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        print("User picked an image")
-        
-//        let UIImagePickerControllerMediaType: String
-//        let UIImagePickerControllerOriginalImage: String
-//        let UIImagePickerControllerEditedImage: String
-//        let UIImagePickerControllerCropRect: String
-//        let UIImagePickerControllerMediaURL: String
-//        let UIImagePickerControllerReferenceURL: String
-//        let UIImagePickerControllerMediaMetadata: String
-//        let UIImagePickerControllerLivePhoto: String
-        
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imagePickerView.image = image
-            imagePickerView.contentMode = UIViewContentMode.ScaleAspectFit
+            configImageViewSize()
         }
         
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func configImageViewSize() {
+        if let image = imagePickerView.image {
+            var imageProportion = image.size.width / imagePickerView.bounds.size.width
+            if imageProportion < 0 {
+                imagePickerView.bounds.size.height = image.size.height * imageProportion
+            } else {
+                imageProportion = imagePickerView.bounds.size.width / image.size.width
+                imagePickerView.bounds.size.height = image.size.height * imageProportion
+            }
+        }
     }
     
     // MARK: UIImagePickerControllerDelegate

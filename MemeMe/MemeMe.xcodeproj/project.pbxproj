@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF38611A1D54B6FF003759F6 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3861191D54B6FF003759F6 /* Meme.swift */; };
 		CF94B2941D520E8A00663C35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF94B2931D520E8A00663C35 /* AppDelegate.swift */; };
 		CF94B2961D520E8A00663C35 /* MemeMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF94B2951D520E8A00663C35 /* MemeMeViewController.swift */; };
 		CF94B2991D520E8A00663C35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF94B2971D520E8A00663C35 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CF3861191D54B6FF003759F6 /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 		CF94B2901D520E8A00663C35 /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF94B2931D520E8A00663C35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF94B2951D520E8A00663C35 /* MemeMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMeViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				CF94B29A1D520E8A00663C35 /* Assets.xcassets */,
 				CF94B29C1D520E8A00663C35 /* LaunchScreen.storyboard */,
 				CF94B29F1D520E8A00663C35 /* Info.plist */,
+				CF3861191D54B6FF003759F6 /* Meme.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -136,6 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF38611A1D54B6FF003759F6 /* Meme.swift in Sources */,
 				CF94B2961D520E8A00663C35 /* MemeMeViewController.swift in Sources */,
 				CF94B2941D520E8A00663C35 /* AppDelegate.swift in Sources */,
 			);
@@ -291,6 +295,7 @@
 				CF94B2A41D520E8A00663C35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
