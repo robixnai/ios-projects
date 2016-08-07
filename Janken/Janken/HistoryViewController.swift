@@ -24,7 +24,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let defaults = NSUserDefaults.standardUserDefaults()
         if let historyDefaults = defaults.arrayForKey("history") {
-            history = historyDefaults
+            history = historyDefaults.reverse()
         }
     }
     
