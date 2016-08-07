@@ -17,6 +17,7 @@ class ResultsViewController: UIViewController {
     
     
     var selectedJankenOption: JankenOption!
+    var cpuWon = false
     var itsATie = false
     var paperCoversRock = false
     var rockCrushesScissors = false
@@ -35,41 +36,68 @@ class ResultsViewController: UIViewController {
     }
 
     func checkConditions(cpuOption: JankenOption) {
+        
         self.itsATie = cpuOption == self.selectedJankenOption ? true : false
         
         self.rockCrushesScissors = cpuOption == .Rock && self.selectedJankenOption == .Scissors ? true : false
         if !self.rockCrushesScissors {
             self.rockCrushesScissors = cpuOption == .Scissors && self.selectedJankenOption == .Rock ? true : false
+            self.cpuWon = false
+        } else {
+            self.cpuWon = true
         }
         
         self.paperCoversRock = cpuOption == .Rock && self.selectedJankenOption == .Paper ? true : false
         if !self.paperCoversRock {
             self.paperCoversRock = cpuOption == .Paper && self.selectedJankenOption == .Rock ? true : false
+            self.cpuWon = false
+        } else {
+            self.cpuWon = true
         }
         
         self.scissorsCutPaper = cpuOption == .Paper && self.selectedJankenOption == .Scissors ? true : false
         if !self.scissorsCutPaper {
             self.scissorsCutPaper = cpuOption == .Scissors && self.selectedJankenOption == .Paper ? true : false
+            self.cpuWon = false
+        } else {
+            self.cpuWon = true
         }
         
         configureViews()
     }
     
     func configureViews() {
+        var resultString: String?
+        var tieString: String?
+
         if itsATie {
             resultImageView.image = UIImage.init(named: "itsATie")
-            captionLabel.text = "It's a tie!"
+            tieString = "It's a tie!"
+            captionLabel.text = tieString
         } else if (paperCoversRock){
             resultImageView.image = UIImage.init(named: "PaperCoversRock")
-            captionLabel.text = "Paper covers Rock"
+            resultString = "Paper covers Rock"
+            captionLabel.text = resultString
         } else if (rockCrushesScissors){
             resultImageView.image = UIImage.init(named: "RockCrushesScissors")
-            captionLabel.text = "Rock crushes Scissors"
+            resultString = "Rock crushes Scissors"
+            captionLabel.text = resultString
         } else if (scissorsCutPaper){
             resultImageView.image = UIImage.init(named: "ScissorsCutPaper")
-            captionLabel.text = "Scissors Cut Paper"
+            resultString = "Scissors Cut Paper"
+            captionLabel.text = resultString
         }
-    
+        
+        if let tie = tieString {
+            saveUserDefaults("Tie", detailText: tie)
+        } else if let result = resultString {
+            if self.cpuWon {
+                saveUserDefaults("Won", detailText: result)
+            } else {
+                saveUserDefaults("Lost", detailText: result)
+            }
+        }
+
     }
     
     func configureOptionImageView(imageView: UIImageView, jankenOption: JankenOption) {
@@ -86,6 +114,18 @@ class ResultsViewController: UIViewController {
         if let image = image {
             imageView.image = image
         }
+    }
+    
+    func saveUserDefaults(titleText: String, detailText: String) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        var historyDefaults = defaults.arrayForKey("history")
+        
+        if historyDefaults == nil {
+            historyDefaults = []
+        }
+        
+        historyDefaults!.append(["title": titleText, "detail": detailText])
+        defaults.setObject(historyDefaults, forKey: "history")
     }
     
     @IBAction func playAgain() {

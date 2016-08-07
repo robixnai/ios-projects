@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF38611D1D57C74F003759F6 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF38611B1D57C2BF003759F6 /* HistoryViewController.swift */; };
 		CF94B21D1D5045E300663C35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF94B21C1D5045E300663C35 /* AppDelegate.swift */; };
 		CF94B21F1D5045E300663C35 /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF94B21E1D5045E300663C35 /* MatchViewController.swift */; };
 		CF94B2221D5045E300663C35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF94B2201D5045E300663C35 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CF38611B1D57C2BF003759F6 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		CF94B2191D5045E300663C35 /* Janken.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Janken.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF94B21C1D5045E300663C35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF94B21E1D5045E300663C35 /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				CF94B2281D5045E300663C35 /* Info.plist */,
 				CF94B22E1D504B2600663C35 /* ResultsViewController.swift */,
 				CF94B2301D504C2300663C35 /* JankenOptions.swift */,
+				CF38611B1D57C2BF003759F6 /* HistoryViewController.swift */,
 			);
 			path = Janken;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF38611D1D57C74F003759F6 /* HistoryViewController.swift in Sources */,
 				CF94B21F1D5045E300663C35 /* MatchViewController.swift in Sources */,
 				CF94B2311D504C2300663C35 /* JankenOptions.swift in Sources */,
 				CF94B21D1D5045E300663C35 /* AppDelegate.swift in Sources */,
@@ -299,6 +303,7 @@
 				CF94B22D1D5045E300663C35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

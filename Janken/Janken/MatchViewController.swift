@@ -16,10 +16,11 @@ class MatchViewController: UIViewController {
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let controller = segue.destinationViewController as! ResultsViewController
         
-        if let tag = sender as! Int?, jankenOption = JankenOption(rawValue: tag) {
-            controller.selectedJankenOption = jankenOption
+        if let controller = segue.destinationViewController as? ResultsViewController {
+            if let tag = sender as! Int?, jankenOption = JankenOption(rawValue: tag) {
+                controller.selectedJankenOption = jankenOption
+            }
         }
     }
 
