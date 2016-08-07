@@ -128,6 +128,7 @@
                         <outlet property="bottomTextField" destination="IcS-wJ-e0k" id="FW8-uE-RkO"/>
                         <outlet property="cameraButton" destination="ApC-2B-dhP" id="Cm4-p0-hOi"/>
                         <outlet property="imagePickerView" destination="Wht-Be-rlL" id="BHr-gb-D0Q"/>
+                        <outlet property="toolBar" destination="LRV-st-yYq" id="NWm-bX-d4Q"/>
                         <outlet property="topTextField" destination="PTQ-n6-jOR" id="4eB-6e-tfX"/>
                     </connections>
                 </viewController>

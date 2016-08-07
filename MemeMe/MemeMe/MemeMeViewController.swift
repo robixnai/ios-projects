@@ -10,6 +10,7 @@ import UIKit
 
 class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var bottomTextField: UITextField!
@@ -58,9 +59,13 @@ class MemeMeViewController: UIViewController, UIImagePickerControllerDelegate, U
     func generateMemeImage() -> UIImage {
         UIGraphicsBeginImageContext(self.view.frame.size)
         
+        toolBar.hidden = true
+        
         view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
         let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
+        toolBar.hidden = false
         
         return memedImage
     }
